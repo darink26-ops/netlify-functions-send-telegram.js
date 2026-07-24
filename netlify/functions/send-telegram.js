@@ -1,33 +1,29 @@
-const fetch = require('node-fetch');
-
 exports.handler = async (event) => {
-  // Дозволяємо лише POST-запити
   if (event.httpMethod !== 'POST') {
     return { statusCode: 405, body: 'Method Not Allowed' };
   }
 
   try {
-    // Зчитуємо дані, які прийшли з форми
-    const data = JSON.parse(event.body);
+    const data = JSON.parse(event.body || '{}');
 
     const botToken = process.env.TELEGRAM_BOT_TOKEN;
     const chatId = process.env.TELEGRAM_CHAT_ID;
 
     if (!botToken || !chatId) {
+      console.error('Missing TELEGRAM_BOT_TOKEN or TELEGRAM_CHAT_ID');
       return {
         statusCode: 500,
-        body: JSON.stringify({ error: 'Telegram credentials are missing in Environment Variables' })
+        body: JSON.stringify({ error: 'Config missing' })
       };
     }
 
-    // Красиво форматуємо текст повідомлення для Telegram
     const messageText = `
 📥 <b>Нова заявка з квізу!</b>
 
 👤 <b>Ім'я:</b> ${data.name || 'Не вказано'}
 📞 <b>Телефон:</b> ${data.phone || 'Не вказано'}
 ${data.email ? `✉️ <b>Email:</b> ${data.email}\n` : ''}
-❓ <b>1-ше запитання квізу:</b>
+❓ <b>1-ше запитання:</b>
 ${data.question1 || 'Не обрано'}
 
 📊 <b>UTM Мітки:</b>
@@ -38,9 +34,7 @@ ${data.question1 || 'Не обрано'}
 • <b>Content:</b> ${data.utm?.utm_content || '—'}
     `.trim();
 
-    // Відправляємо запит до Telegram API
-    const telegramUrl = `https://api.telegram.org/bot${botToken}/sendMessage`;
-    const response = await fetch(telegramUrl, {
+    const response = await fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
@@ -50,22 +44,16 @@ ${data.question1 || 'Не обрано'}
       })
     });
 
+    const resData = await response.json();
+
     if (response.ok) {
-      return {
-        statusCode: 200,
-        body: JSON.stringify({ message: 'Success' })
-      };
+      return { statusCode: 200, body: JSON.stringify({ success: true }) };
     } else {
-      const errorData = await response.json();
-      return {
-        statusCode: response.status,
-        body: JSON.stringify({ error: errorData })
-      };
+      console.error('Telegram API Error:', resData);
+      return { statusCode: 500, body: JSON.stringify({ error: resData }) };
     }
-  } catch (error) {
-    return {
-      statusCode: 500,
-      body: JSON.stringify({ error: error.message })
-    };
+  } catch (err) {
+    console.error('Function Error:', err);
+    return { statusCode: 500, body: JSON.stringify({ error: err.message }) };
   }
 };
