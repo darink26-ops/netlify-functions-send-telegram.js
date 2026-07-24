@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+# The preview is protected from indexing by page-level noindex until approval.
