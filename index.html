@@ -17,7 +17,7 @@
       })(window, document, "clarity", "script", "xsxq6t522w");
   </script><!-- End Microsoft Clarity --><script type="application/ld+json">{"@context":"https://schema.org","@type":"ProfessionalService","name":"Executive coach ICF Дарина Мартиненко","description":"Executive coach ICF для власників бізнесу та керівників: складні рішення, цілі, мотивація, лідерське мислення та наступні кроки.","areaServed":"Online","founder":{"@type":"Person","name":"Дарина Мартиненко","jobTitle":"Executive coach ICF"},"email":"coach.mndarine@gmail.com","telephone":"+380635929121"}</script><link rel="stylesheet" href="/_astro/global.DCtZDocG.css">
 <style>
-  /* Стилі для вбудованої відкритої форми */
+  /* Стилі для вбудованої (першої) короткої форми */
   .quick-form-section {
     padding: 50px 0;
     background: #1c1814;
@@ -52,18 +52,14 @@
     display: flex;
     flex-direction: column;
   }
-  .quick-form-field span,
-  .quick-form-btn-label {
+  .quick-form-field span {
     font-size: 0.85rem;
     color: #d4cfc5;
     margin-bottom: 6px;
-    min-height: 20px; /* Однаковий зазор для верхнього підпису */
-    display: inline-block;
   }
   .quick-form-field input {
     width: 100%;
-    height: 50px;
-    padding: 0 16px;
+    padding: 14px 16px;
     border-radius: 8px;
     border: 1px solid rgba(255, 255, 255, 0.15);
     background: #26211c;
@@ -78,16 +74,13 @@
   .quick-form-btn-wrap {
     display: flex;
     flex-direction: column;
-    flex: 1;
+    justify-content: flex-end;
   }
   .quick-form-btn-wrap button {
     height: 50px;
     white-space: nowrap;
-    padding: 0 24px;
-    box-sizing: border-box;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    padding: 0 28px;
+    margin-top: auto;
   }
   .quick-form-error {
     color: #e53935;
@@ -100,18 +93,15 @@
   @media (max-width: 768px) {
     .quick-form-flex {
       flex-direction: column;
-      gap: 12px;
+      gap: 16px;
       max-width: 100%;
     }
     .quick-form-field, .quick-form-btn-wrap {
       width: 100%;
     }
-    .quick-form-btn-label {
-      display: none; /* Приховуємо фейковий лейбл на мобільних */
-    }
     .quick-form-btn-wrap button {
       width: 100%;
-      margin-top: 4px;
+      margin-top: 8px;
     }
     .quick-form-title {
       font-size: 1.4rem;
@@ -120,7 +110,7 @@
 </style>
 </head><body><noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=4171233512978796&ev=PageView&noscript=1" alt=""></noscript><a class="skip-link" href="#main">До основного змісту</a><header class="site-header"><div class="container header-inner"><a class="brand" href="#top" aria-label="Дарина Мартиненко — на початок сторінки"><span>Дарина Мартиненко</span><small>Executive coach ICF</small></a><nav class="desktop-nav" aria-label="Основна навігація"><a href="#situations">Коли доречно</a><a href="#approach">Про коучинг</a><a href="#about">Про Дарину</a><a href="#faq">FAQ</a></nav><a class="button button-small" href="#quick-booking">Безкоштовне знайомство</a></div></header><main id="main"><section class="hero" id="top"><div class="container hero-grid"><div class="hero-copy"><p class="overline">Executive coach ICF для власників бізнесу та керівників</p><h1>Прийміть складне бізнес-рішення <em>без шуму чужих порад</em></h1><p class="hero-lede">Моє завдання — створити для вас простір, де ви зможете видихнути, знайти приховані інсайти й побачити свої виклики під іншим кутом. З ресурсом. З вірою. З чітким розумінням, куди йти далі.</p><ul class="hero-benefits" aria-label="Що ви отримаєте"><li>Ясніші критерії рішення</li><li>Власна позиція без чужих сценаріїв</li><li>Наступна дія, яку можна виконати</li></ul><div class="hero-action"><a class="button" href="#quick-booking">Записатися на безкоштовне знайомство</a><p>Безкоштовно · 20–30 хвилин · онлайн</p></div></div><figure class="hero-portrait"><picture><source type="image/webp" srcset="/images/hero/daryna-full-480.webp 480w, /images/hero/daryna-full-768.webp 733w" sizes="(max-width: 767px) 92vw, 42vw"><img src="/images/source/daryna-full.jpg" width="733" height="1100" alt="Дарина Мартиненко, Executive coach ICF" fetchpriority="high" decoding="async"></picture><figcaption>Дарина Мартиненко · Executive coach ICF</figcaption></figure></div></section>
 
-<!-- ВДРУКОВАНА ВІДКРИТА КОРОТКА ФОРМА (ІДЕАЛЬНО ВИРІВНЯНА) -->
+<!-- ВДРУКОВАНА ВІДКРИТА КОРОТКА ФОРМА (ВЕБ — ГОРИЗОНТАЛЬНА, МОБІЛКА — ВЕРТИКАЛЬНА) -->
 <section class="quick-form-section" id="quick-booking">
   <div class="container">
     <h2 class="quick-form-title">Записатись на безкоштовне знайомство</h2>
@@ -140,7 +130,6 @@
             <span class="quick-form-error" id="quick-phone-error"></span>
           </div>
           <div class="quick-form-btn-wrap">
-            <span class="quick-form-btn-label" aria-hidden="true"></span>
             <button class="button" type="submit">Записатись на безкоштовне знайомство</button>
             <span class="quick-form-error"></span>
           </div>
