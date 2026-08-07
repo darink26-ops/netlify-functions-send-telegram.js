@@ -1,7 +1,6 @@
 // Telegram relay for all landing-page forms.
 // Accepts JSON: { name, phone, role, question1, email?, utm: {...}, landing_url?, referrer? }
-// Returns 200 { success: true } only after Telegram confirms delivery — the client ties the
-// Meta Pixel Lead event to this response, so it must never return 200 optimistically.
+// Returns 200 { success: true } only after Telegram confirms delivery.
 
 const escapeHtml = (value) =>
   String(value)
@@ -35,8 +34,6 @@ exports.handler = async (event) => {
   }
 
   const utm = data.utm || {};
-  const hasUtm = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_term', 'utm_content']
-    .some((key) => utm[key]);
 
   const lines = [
     '📥 <b>Нова заявка з сайту</b>',
@@ -52,17 +49,16 @@ exports.handler = async (event) => {
 
   lines.push('', '❓ <b>Запит:</b>', field(data.question1, 'Не обрано'));
 
-  if (hasUtm) {
-    lines.push(
-      '',
-      '📊 <b>UTM мітки:</b>',
-      `• <b>Source:</b> ${field(utm.utm_source, '—')}`,
-      `• <b>Medium:</b> ${field(utm.utm_medium, '—')}`,
-      `• <b>Campaign:</b> ${field(utm.utm_campaign, '—')}`,
-      `• <b>Term:</b> ${field(utm.utm_term, '—')}`,
-      `• <b>Content:</b> ${field(utm.utm_content, '—')}`
-    );
-  }
+  // Завжди додаємо блок з UTM-мітками
+  lines.push(
+    '',
+    '📊 <b>UTM мітки:</b>',
+    `• <b>Source:</b> ${field(utm.utm_source, '—')}`,
+    `• <b>Medium:</b> ${field(utm.utm_medium, '—')}`,
+    `• <b>Campaign:</b> ${field(utm.utm_campaign, '—')}`,
+    `• <b>Term:</b> ${field(utm.utm_term, '—')}`,
+    `• <b>Content:</b> ${field(utm.utm_content, '—')}`
+  );
 
   if (data.landing_url) {
     lines.push('', `🔗 ${field(data.landing_url, '—')}`);
